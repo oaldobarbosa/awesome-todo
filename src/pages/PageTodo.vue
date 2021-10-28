@@ -1,37 +1,51 @@
 <template>
-    <q-page class="q-pa-md">
-        
-        <q-list 
-        separator
-        bordered >
+  <q-page class="q-pa-md">
+    <q-list separator bordered>
+      <task
+        v-for="(task, key) in tasks"
+        :key="key"
+        :task="task"
+        :id="key"
+      ></task>
+    </q-list>
+    
+    <div class="absolute-bottom text-center q-mb-lg">
+      <q-btn 
+      @click="showAddTask = true"
+      round 
+      color="primary" 
+      size="24px" 
+      icon="add" />
+    </div>
 
-            <task
-                v-for="(task, key) in tasks" 
-                :key="key"
-                :task="task"
-                :id="key"></task>
 
-        </q-list>
+    <q-dialog v-model="showAddTask">
+      <add-task />   
+    </q-dialog>
 
-    </q-page>
+  </q-page>
 </template>
 
 <script>
+import Task from "src/components/Tasks/Task.vue";
+import { mapGetters } from "vuex";
+import AddTask from 'components/Tasks/Modals/AddTask.vue';
 
-    import Task from 'src/components/Tasks/Task.vue'
-    import { mapGetters } from 'vuex'
-
-    export default {
-        computed: {
-            ...mapGetters('tasks', ['tasks'])
-        },
-        components: {
-            'task' : require('components/Tasks/Task.vue').
-                default
-        }
+export default {
+  data(){
+    return{
+      showAddTask: true
     }
-    
+  },
+  computed: {
+    ...mapGetters("tasks", ["tasks"]),
+  },
+  components: {
+    'task': require("components/Tasks/Task.vue").default,
+    'add-task': require("components/Tasks/Modals/AddTask.vue").default
+  },
+};
 </script>
 
-<style> 
+<style>
 </style>
