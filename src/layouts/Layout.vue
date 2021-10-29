@@ -9,7 +9,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-footer>
+    <q-footer reveal>
       <q-tabs>
         <q-route-tab
           v-for="nav in navs"
