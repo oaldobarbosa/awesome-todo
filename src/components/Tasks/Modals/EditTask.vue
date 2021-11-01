@@ -1,6 +1,6 @@
 <template>
   <q-card>
-        <modal-header>Add Task</modal-header>
+        <modal-header>Edit Task</modal-header>
 
         <q-form @submit="submitForm">
 

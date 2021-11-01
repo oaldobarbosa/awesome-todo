@@ -74,6 +74,11 @@ export default {
           icon: "settings",
           to: "/settings",
         },
+        {
+          label: "About",
+          icon: "info",
+          to: "/about",
+        },
       ],
     };
   },

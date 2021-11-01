@@ -1,0 +1,26 @@
+<template>
+
+    <q-card-section class="row">
+        <div class="text-h6"><slot></slot></div>
+
+        <q-space />
+
+        <q-btn 
+        v-close-popup
+        flat 
+        dense
+        round 
+        icon="close" />
+    </q-card-section>
+
+</template>
+
+<script>
+export default {
+    //props: ['modal-header'],
+}
+</script>
+
+<style>
+
+</style>

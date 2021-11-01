@@ -3,78 +3,25 @@ import { uid } from 'quasar'
 
 const state = {
   tasks: {
-    // ID1: {
-    //   name: "Go to shop",
-    //   completed: false,
-    //   dueDate: "2021/10/23",
-    //   dueTime: "18:30"
-    // },
-    // ID2: {
-    //   name: "Get bananas",
-    //   completed: true,
-    //   dueDate: "2021/10/24",
-    //   dueTime: "14:30"
-    // },
-    // ID3: {
-    //   name: "Go to metro",
-    //   completed: false,
-    //   dueDate: "2021/10/25",
-    //   dueTime: "12:30"
-    // },
-    // a: {
-    //   name: "Go to shop",
-    //   completed: false,
-    //   dueDate: "2021/10/23",
-    //   dueTime: "18:30"
-    // },
-    // b: {
-    //   name: "Get bananas",
-    //   completed: true,
-    //   dueDate: "2021/10/24",
-    //   dueTime: "14:30"
-    // },
-    // c: {
-    //   name: "Go to metro",
-    //   completed: false,
-    //   dueDate: "2021/10/25",
-    //   dueTime: "12:30"
-    // },
-    // d: {
-    //   name: "Go to shop",
-    //   completed: false,
-    //   dueDate: "2021/10/23",
-    //   dueTime: "18:30"
-    // },
-    // e: {
-    //   name: "Get bananas",
-    //   completed: true,
-    //   dueDate: "2021/10/24",
-    //   dueTime: "14:30"
-    // },
-    // f: {
-    //   name: "Go to metro",
-    //   completed: false,
-    //   dueDate: "2021/10/25",
-    //   dueTime: "12:30"
-    // },
-    // g: {
-    //   name: "Go to shop",
-    //   completed: false,
-    //   dueDate: "2021/10/23",
-    //   dueTime: "18:30"
-    // },
-    // h: {
-    //   name: "Get bananas",
-    //   completed: true,
-    //   dueDate: "2021/10/24",
-    //   dueTime: "14:30"
-    // },
-    // i: {
-    //   name: "Go to metro",
-    //   completed: false,
-    //   dueDate: "2021/10/25",
-    //   dueTime: "12:30"
-    // }
+    ID1: {
+      name: "Go to shop",
+      completed: false,
+      dueDate: "2021/10/23",
+      dueTime: "18:30"
+    },
+    ID2: {
+      name: "Get bananas",
+      completed: false,
+      dueDate: "2021/10/24",
+      dueTime: "14:30"
+    },
+    ID3: {
+      name: "Go to metro",
+      completed: false,
+      dueDate: "2021/10/25",
+      dueTime: "12:30"
+    },
+
   }
 };
 

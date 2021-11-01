@@ -16,8 +16,8 @@
 
         <q-separator dark inset />
 
-        <q-card-section>
-          <div class="row">
+        <q-card-section >
+          <div class="row justify-lg-beetewn">
             <div class="left">
               <q-circular-progress
                 show-value
@@ -32,10 +32,10 @@
 
             </div>
 
-            <div class="right"></div>
+            <div class="right text-center full-height">
+              oloco meu
+            </div>
           </div>
-          
-           
           
         </q-card-section>
 
@@ -63,6 +63,7 @@
 
 .my-card{
   background-color: #44D466;
+  border-radius: 10px;
 }
 
  
