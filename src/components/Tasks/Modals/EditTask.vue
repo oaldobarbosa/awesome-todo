@@ -1,5 +1,5 @@
 <template>
-  <q-card>
+    <q-card>
         <modal-header>Edit Task</modal-header>
 
         <q-form @submit="submitForm">
@@ -14,7 +14,7 @@
             <modal-buttons></modal-buttons>
         </q-form>
 
-      </q-card>
+    </q-card>
 </template>
 
 <script>
@@ -26,6 +26,7 @@ import ModalDueTime from 'components/Tasks/Modals/Shared/ModalDueTime.vue';
 import ModalButtons from 'components/Tasks/Modals/Shared/ModalButtons.vue';
 
 export default {
+    props: ['task', 'id',],
     data(){
         return {
             taskToSubmit: {
@@ -37,7 +38,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions('tasks', ['addTask']),
+        ...mapActions('tasks', ['updateTask']),
 
         submitForm(){
             this.$refs.modalTaskName.$refs.name.validate();
@@ -46,7 +47,10 @@ export default {
             }
         },
         submitTask(){
-            this.addTask(this.taskToSubmit)
+            this.updateTask({
+                id: this.id,
+                updates: this.taskToSubmit
+            })
             this.$emit('close')
         },
         clearDues(){
@@ -61,7 +65,9 @@ export default {
         'modal-due-date': require("components/Tasks/Modals/Shared/ModalDueDate.vue").default,
         'modal-due-time': require("components/Tasks/Modals/Shared/ModalDueTime.vue").default,
         'modal-buttons': require("components/Tasks/Modals/Shared/ModalButtons.vue").default     
-       
+    },
+    mounted() {
+        this.taskToSubmit = Object.assign({}, this.task)
     }
 
 }
