@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Sort from 'src/components/Tasks/Tools/Sort.vue';
+
 import { mapGetters, mapState } from "vuex";
 
 export default {
@@ -58,8 +58,7 @@ export default {
     'no-tasks': require("components/Tasks/NoTasks.vue").default,
     'tasks-completed': require("components/Tasks/TasksCompleted.vue").default,
     'search': require("components/Tasks/Tools/Search.vue").default,
-    
-    Sort
+    'sort': require("components/Tasks/Tools/Sort.vue").default,
     
   },
 };

@@ -23,7 +23,7 @@ const state = {
         },
     },
     search: '',
-    sort: 'dueDate'
+    sort: 'name'
 };
 
 const mutations = {
@@ -38,6 +38,9 @@ const mutations = {
     },
     setSearch(state, value){
         state.search = value
+    },
+    setSort(state, value){
+        state.sort = value
     }
 };
 
@@ -59,6 +62,10 @@ const actions = {
     },
     setSearch ({commit}, value){
         commit("setSearch", value);
+
+    },
+    setSort ({commit}, value){
+        commit("setSort", value);
 
     }
 };

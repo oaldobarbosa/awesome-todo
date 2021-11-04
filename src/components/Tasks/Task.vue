@@ -92,7 +92,7 @@
             promptToDelete(id) {
                 this.$q.dialog({
                     title: 'Confirm',
-                    message: 'Would you like to turn on the wifi?',
+                    message: 'Delete task?',
                     cancel: true,
                     persistent: true
                 }).onOk(() => {
