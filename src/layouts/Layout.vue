@@ -1,106 +1,114 @@
 <template>
-  <q-layout view="hHh LpR fff">
+    <q-layout view="hHh LpR fff">
 
-    <q-header elevated>
-      <q-toolbar>
+        <q-header elevated>
+        <q-toolbar>
 
-        <q-toolbar-title class="absolute-center"> 
-          Awesome Todo 
-        </q-toolbar-title>
+            <q-toolbar-title class="absolute-center"> 
+            Awesome Todo 
+            </q-toolbar-title>
 
-        <q-btn to="/auth" flat icon-right="account_circle" label="Login" class="absolute-right" />,
-3
-      </q-toolbar>
-    </q-header>
+            <q-btn v-if="!loggedIn" to="/auth" flat icon-right="account_circle" label="Login" class="absolute-right" />
+            <q-btn v-if="loggedIn" @click="logoutUser" flat icon-right="logout" label="Logout" class="absolute-right" />
+        </q-toolbar>
+        </q-header>
 
-    <q-footer reveal>
-      <q-tabs>
-        <q-route-tab
-          v-for="nav in navs"
-          :key="nav.index"
-          :to="nav.to"
-          :icon="nav.icon"
-          :label="nav.label"
-          exact
-        />
-      </q-tabs>
-    </q-footer>
+        <q-footer reveal>
+            <q-tabs>
+                <q-route-tab
+                v-for="nav in navs"
+                :key="nav.index"
+                :to="nav.to"
+                :icon="nav.icon"
+                :label="nav.label"
+                exact
+                />
+            </q-tabs>
+        </q-footer>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      :breakpoint="767"
-      :width="250"
-      show-if-above
-      bordered
-      content-class="bg-primary"
-    >
-      <q-list dark>
-        <q-item-label header >Navigation</q-item-label>
-
-        <q-item
-          v-for="nav in navs"
-          v-bind:key="nav.label"
-          :to="nav.to"
-          class="text-grey-4"
-          exact
-          clickable
+        <q-drawer
+        v-model="leftDrawerOpen"
+        :breakpoint="767"
+        :width="250"
+        show-if-above
+        bordered
+        content-class="bg-primary"
         >
-          <q-item-section avatar>
-            <q-icon :name="nav.icon" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ nav.label }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
+        <q-list dark>
+            <q-item-label header >Navigation</q-item-label>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+            <q-item
+            v-for="nav in navs"
+            v-bind:key="nav.label"
+            :to="nav.to"
+            class="text-grey-4"
+            exact
+            clickable
+            >
+            <q-item-section avatar>
+                <q-icon :name="nav.icon" />
+            </q-item-section>
+            <q-item-section>
+                <q-item-label>{{ nav.label }}</q-item-label>
+            </q-item-section>
+            </q-item>
+        </q-list>
+        </q-drawer>
+
+        <q-page-container>
+            <router-view />
+        </q-page-container>
+    </q-layout>
 </template>
 
 <script>
-export default {
-  name: "MainLayout",
-  data() {
-    return {
-      leftDrawerOpen: false,
-      navs: [
-        {
-          label: "Todo",
-          icon: "list",
-          to: "/",
+    import { mapState, mapActions } from "vuex";
+
+    export default {
+        name: "MainLayout",
+        data() {
+            return {
+            leftDrawerOpen: false,
+            navs: [
+                {
+                label: "Todo",
+                icon: "list",
+                to: "/",
+                },
+                {
+                label: "Settings",
+                icon: "settings",
+                to: "/settings",
+                },
+                {
+                label: "About",
+                icon: "info",
+                to: "/about",
+                },
+            ],
+            };
         },
-        {
-          label: "Settings",
-          icon: "settings",
-          to: "/settings",
+        computed:{
+            ...mapState('auth', ['loggedIn'])
         },
-        {
-          label: "About",
-          icon: "info",
-          to: "/about",
-        },
-      ],
+        methods: {
+            ...mapActions('auth', ['logoutUser'] )
+        }
     };
-  },
-};
 </script>
 
 <style lang="scss" >
 
 @media screen and (min-width: 768px){
-  .q-footer{
-    display: none;
-  }
+    .q-footer{
+        display: none;
+    }
 }
 
 .q-drawer{
-  .q-router-link--exact-active{
-    color: white !important;
-  }
+    .q-router-link--exact-active{
+        color: white !important;
+    }
 } 
 
 </style>
