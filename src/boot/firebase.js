@@ -2,6 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signOut, 
   signInWithEmailAndPassword, onAuthStateChanged, } from "firebase/auth";
 
+import { getDatabase, ref, onValue, child } from "firebase/database";
+
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
     apiKey: "AIzaSyB5Adtp-jt0dq8aBoDkzpLeVVWL37BnyqA",
@@ -17,9 +19,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 let firebaseAuth = getAuth(app);
+let firebaseDb = getDatabase(app);
 
 export { 
-  firebaseAuth, 
+  firebaseAuth,
+  firebaseDb,
+  onValue,
+  child,
+  ref, 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
   onAuthStateChanged,

@@ -1,26 +1,27 @@
 import Vue from "vue";
 import { uid } from 'quasar'
+import { firebaseDb, ref, firebaseAuth, onValue } from "boot/firebase";
 
 const state = {
     tasks: {
-        ID1: {
-        name: "cGo to shop",
-        completed: false,
-        dueDate: "2021/10/23",
-        dueTime: "18:30"
-        },
-        ID2: {
-        name: "bGet bananas",
-        completed: false,
-        dueDate: "2021/10/24",
-        dueTime: "14:30"
-        },
-        ID3: {
-        name: "aGo to metro",
-        completed: false,
-        dueDate: "2021/10/25",
-        dueTime: "12:30"
-        },
+        // ID1: {
+        // name: "cGo to shop",
+        // completed: false,
+        // dueDate: "2021/10/23",
+        // dueTime: "18:30"
+        // },
+        // ID2: {
+        // name: "bGet bananas",
+        // completed: false,
+        // dueDate: "2021/10/24",
+        // dueTime: "14:30"
+        // },
+        // ID3: {
+        // name: "aGo to metro",
+        // completed: false,
+        // dueDate: "2021/10/25",
+        // dueTime: "12:30"
+        // },
     },
     search: '',
     sort: 'name'
@@ -62,12 +63,20 @@ const actions = {
     },
     setSearch ({commit}, value){
         commit("setSearch", value);
-
     },
     setSort ({commit}, value){
         commit("setSort", value);
+    },
+    fbReadData({ commit }){
+        let userID = firebaseAuth.currentUser.uid;
+        const userTasks = ref(firebaseDb, 'tasks/' + userID);
+
+        onValue(userTasks, (snapshot) => {
+            console.log('snapshot: ', snapshot.val());
+        });
 
     }
+
 };
 
 const getters = {
