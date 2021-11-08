@@ -2,10 +2,10 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword, signOut, 
   signInWithEmailAndPassword, onAuthStateChanged, } from "firebase/auth";
 
-import { getDatabase, ref, onValue, child } from "firebase/database";
+import { getDatabase, ref, onValue, onChildAdded, onChildChanged, onChildRemoved, set, update, remove, child, get, } from "firebase/database";
 
-// TODO: Replace the following with your app's Firebase project configuration
-const firebaseConfig = {
+//configuração para firebase funcionar no software
+const firebaseConfig = {//configuração do app
     apiKey: "AIzaSyB5Adtp-jt0dq8aBoDkzpLeVVWL37BnyqA",
     authDomain: "awesome-todo-7334d.firebaseapp.com",
     databaseURL: "https://awesome-todo-7334d-default-rtdb.firebaseio.com",
@@ -18,14 +18,21 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-let firebaseAuth = getAuth(app);
-let firebaseDb = getDatabase(app);
+let firebaseAuth = getAuth(app);//instancia da autenticaç]ap
+let firebaseDb = getDatabase(app);//instancia do banco
 
 export { 
   firebaseAuth,
   firebaseDb,
   onValue,
+  onChildAdded,
+  onChildChanged,
+  onChildRemoved,
+  set,
+  update,
+  remove,
   child,
+  get,
   ref, 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,

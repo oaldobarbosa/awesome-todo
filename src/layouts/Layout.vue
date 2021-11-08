@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from "vuex";
+    import { mapState, mapActions } from "vuex";//mapear o State e as Actions
 
     export default {
         name: "MainLayout",
@@ -89,10 +89,10 @@
             };
         },
         computed:{
-            ...mapState('auth', ['loggedIn'])
+            ...mapState('auth', ['loggedIn']) //mapear o state do auth
         },
         methods: {
-            ...mapActions('auth', ['logoutUser'] )
+            ...mapActions('auth', ['logoutUser'] ) //mapear ação de logout
         }
     };
 </script>
