@@ -18,7 +18,7 @@ const actions = {
     registerUser({}, payload) {
         createUserWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
             .then(response => {
-                console.log('response: ', response);
+                //console.log('response: ', response);
             })
             .catch(error => {
                 showErrorMessage(error.message)
@@ -28,7 +28,7 @@ const actions = {
         Loading.show()
         signInWithEmailAndPassword(firebaseAuth, payload.email, payload.password)
             .then(response => {
-                console.log('response: ', response);
+                //console.log('response: ', response);
             })
             .catch(error => {
                 showErrorMessage(error.message)
@@ -43,6 +43,12 @@ const actions = {
                 this.$router.push('/').catch(err => {})
                 dispatch('tasks/fbReadData', null, { root: true })//ler dados do firebase
             } else {
+                commit('tasks/clearTasks', null, {
+                    root: true
+                })
+                commit('tasks/setTasksDownloaded', false, { //setar false pela raiz
+                    root: true
+                })
                 commit('setLoggedIn', false)
                 LocalStorage.set('loggedIn', false)
                 this.$router.replace('/auth').catch(err => {})

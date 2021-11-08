@@ -1,6 +1,7 @@
 import Vue from "vue";
-import { uid } from 'quasar'
+import { uid, Notify } from 'quasar'
 import { firebaseDb, ref, firebaseAuth, onValue, onChildAdded, onChildChanged, onChildRemoved, set, update, remove, child, get } from "boot/firebase";
+import { showErrorMessage } from "src/functions/function-show-error-message";
 
 const state = {
     tasks: {
@@ -37,6 +38,9 @@ const mutations = {
     },
     addTask(state, payload) {
         Vue.set(state.tasks, payload.id, payload.task)
+    },
+    clearTasks(state) {
+        state.tasks = {}
     },
     setSearch(state, value){
         state.search = value
@@ -77,7 +81,10 @@ const actions = {
         //set true to read data e retirando tela de loading
         onValue(ref(firebaseDb, 'tasks/' + userID), (snapshot) => {
             commit('setTasksDownloaded', true)
-        });        
+        }, error => {
+            showErrorMessage(error.message)
+            this.$router.replace('/auth').catch(err => {})
+        } );        
 
         //Child Added
         onChildAdded(userTasks, (snapshot) => { //pegar filhos das tasks do usuario
@@ -110,16 +117,37 @@ const actions = {
         let userID = firebaseAuth.currentUser.uid;//pegar o id do usuário ativo
         let taskRef = ref(firebaseDb, 'tasks/' + userID + '/' + payload.id) //referencia da nova task       
         set(taskRef, payload.task) //setando valores no firebase
+            .then(() => {
+                Notify.create('Task Added!')
+            })
+            .catch((error) =>{
+                showErrorMessage(error.message)
+            })
     },
     fbUpdateTask({}, payload){
         let userID = firebaseAuth.currentUser.uid;
         let taskRef = ref(firebaseDb, 'tasks/' + userID + '/' + payload.id)
         update(taskRef, payload.updates) // update valores no firebase
+            .then(() => {
+                let keys = Object.keys(payload.updates)
+                if (!(keys.includes('completed') && keys.length == 1 )) { //verificar se é do tipo completed, se for não notifica
+                    Notify.create('Task Updated!')                    
+                }
+            })
+            .catch((error) =>{
+                showErrorMessage(error.message)
+            })
     },
     fbDeleteTask({} , taskId){
         let userID = firebaseAuth.currentUser.uid;
         let taskRef = ref(firebaseDb, 'tasks/' + userID + '/' + taskId)
         remove(taskRef, taskId)
+            .then(() => {
+                Notify.create('Task Deleted!')
+            })
+            .catch((error) =>{
+                showErrorMessage(error.message)
+            })
 
     }
 

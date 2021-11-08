@@ -99,7 +99,8 @@ module.exports = function (/* ctx */) {
       plugins: [
         'Dialog',
         'LocalStorage',
-        'Loading'
+        'Loading',
+        'Notify'
       ]
     },
 
